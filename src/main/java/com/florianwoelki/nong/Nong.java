@@ -2,6 +2,10 @@ package com.florianwoelki.nong;
 
 /**
  * Created by Florian Woelki on 15.12.16.
+ * <p>
+ * <summary>
+ * This is the main class.
+ * </summary>
  */
 public class Nong {
 

@@ -5,6 +5,10 @@ import java.awt.*;
 
 /**
  * Created by Florian Woelki on 15.12.16.
+ * <p>
+ * <summary>
+ * This class represents the window.
+ * </summary>
  */
 public class Window extends JFrame {
 
@@ -12,6 +16,12 @@ public class Window extends JFrame {
     private static final int HEIGHT = 640;
     private static final String TITLE = "Nong";
 
+    /**
+     * Constructor of the window.
+     * This will construct the basic game window.
+     *
+     * @param game Main Game class
+     */
     public Window( Game game ) {
         super( Window.TITLE );
 

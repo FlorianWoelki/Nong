@@ -5,6 +5,11 @@ import java.awt.event.KeyListener;
 
 /**
  * Created by Florian Woelki on 15.12.16.
+ * <p>
+ * <summary>
+ * This class represents the keyboard.
+ * It handles all the input of your keyboard.
+ * </summary>
  */
 public class Keyboard implements KeyListener {
 
@@ -12,6 +17,9 @@ public class Keyboard implements KeyListener {
     public boolean left, right;
     public boolean isSpaceActivated;
 
+    /**
+     * Update the keys of the game.
+     */
     public void update() {
         this.left = this.keys[KeyEvent.VK_LEFT] || this.keys[KeyEvent.VK_A];
         this.right = this.keys[KeyEvent.VK_RIGHT] || this.keys[KeyEvent.VK_D];

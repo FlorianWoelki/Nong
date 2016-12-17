@@ -11,6 +11,10 @@ import java.awt.*;
 
 /**
  * Created by Florian Woelki on 15.12.16.
+ * <p>
+ * <summary>
+ * This class represents the player with all properties.
+ * </summary>
  */
 public class Player extends Entity {
 
@@ -32,6 +36,12 @@ public class Player extends Entity {
 
     private NeuralNetwork brain;
 
+    /**
+     * Constructor of the player.
+     * Setup the NeuralNetwork and all other initial stuff.
+     *
+     * @param game Main Game class
+     */
     public Player( Game game ) {
         super( game, game.getWidth() / 2 - Player.PLAYER_WIDTH / 2, game.getHeight() - 20 );
 
@@ -44,6 +54,7 @@ public class Player extends Entity {
 
         this.outMoveDirection.setName( this.NAME_OUT_MOVE_DIRECTION );
 
+        // Creating brain/Neural Network
         this.brain = new NeuralNetwork();
 
         this.brain.addInputNeuron( this.inBias );
@@ -59,12 +70,21 @@ public class Player extends Entity {
         this.brain.randomizeAllWeights();
     }
 
+    /**
+     * This method renders the player.
+     *
+     * @param g Graphics for rendering
+     */
     @Override
     public void render( Graphics g ) {
         g.setColor( Color.WHITE );
         g.fillRect( (int) this.x, (int) this.y, this.width, this.height );
     }
 
+    /**
+     * This method updates the player.
+     * It handles the input and the brain update.
+     */
     @Override
     public void update() {
         this.x += this.dx;
@@ -104,6 +124,9 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     * Set all values of the neural network.
+     */
     private void setInputValues() {
         this.inBias.setValue( 1f );
         this.inBallX.setValue( this.game.getBall().x );
@@ -115,6 +138,9 @@ public class Player extends Entity {
         System.out.println( "------" );
     }
 
+    /**
+     * With this method the player will act caused by the Neural Network.
+     */
     private void act() {
         if ( this.outMoveDirection.getValue() <= 0.5f ) {
             this.dx = -Player.MOVE_SPEED;
@@ -123,6 +149,9 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     * This method resets the coordinates and the speed of the player.
+     */
     public void reset() {
         this.x = game.getWidth() / 2 - Player.PLAYER_WIDTH / 2;
         this.y = game.getHeight() - 20;

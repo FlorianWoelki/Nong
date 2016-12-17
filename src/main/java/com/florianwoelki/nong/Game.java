@@ -11,6 +11,10 @@ import java.awt.image.BufferStrategy;
 
 /**
  * Created by Florian Woelki on 15.12.16.
+ * <p>
+ * <summary>
+ * This class represents the basic main game.
+ * </summary>
  */
 public class Game extends Canvas implements Runnable {
 
@@ -29,6 +33,10 @@ public class Game extends Canvas implements Runnable {
     @Getter
     private int score;
 
+    /**
+     * Constructor of the game.
+     * Initialize everything.
+     */
     public Game() {
         this.keyboard = new Keyboard();
 
@@ -44,6 +52,9 @@ public class Game extends Canvas implements Runnable {
         this.ball.setSpeed( (float) Math.toRadians( -45 ) );
     }
 
+    /**
+     * Start the game thread.
+     */
     public synchronized void start() {
         if ( this.running ) {
             return;
@@ -54,6 +65,9 @@ public class Game extends Canvas implements Runnable {
         this.thread.start();
     }
 
+    /**
+     * Stop the game thread.
+     */
     public synchronized void stop() {
         if ( !this.running ) {
             return;
@@ -67,6 +81,9 @@ public class Game extends Canvas implements Runnable {
         }
     }
 
+    /**
+     * Run method of the thread.
+     */
     @Override
     public void run() {
         long lastTime = System.nanoTime();
@@ -76,6 +93,7 @@ public class Game extends Canvas implements Runnable {
 
         int fps = 0, ups = 0;
 
+        // Game Loop
         while ( this.running ) {
             boolean shouldRender = false;
             long now = System.nanoTime();
@@ -109,6 +127,9 @@ public class Game extends Canvas implements Runnable {
         this.stop();
     }
 
+    /**
+     * This method updates the game with all components.
+     */
     private void update() {
         this.keyboard.update();
         this.player.update();
@@ -116,6 +137,9 @@ public class Game extends Canvas implements Runnable {
         this.ball.checkCollision( this.player );
     }
 
+    /**
+     * This method renders the game with all components.
+     */
     private void render() {
         BufferStrategy bs = getBufferStrategy();
         if ( bs == null ) {
@@ -129,7 +153,7 @@ public class Game extends Canvas implements Runnable {
         this.player.render( g );
         this.ball.render( g );
         g.drawString( "" + this.score, this.getWidth() / 2, 80 );
-        //this.player.brain.render( g, new Rectangle( 150, 0, 200, 250 ) );
+        // this.player.brain.render( g, new Rectangle( 150, 0, 200, 250 ) );
         g.dispose();
         bs.show();
     }

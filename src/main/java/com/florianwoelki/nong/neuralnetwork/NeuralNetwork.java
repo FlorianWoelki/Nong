@@ -5,15 +5,18 @@ import com.florianwoelki.nong.neuralnetwork.exception.NNNotFullyMeshedException;
 import com.florianwoelki.nong.neuralnetwork.exception.NotSameAmountOfNeuronsException;
 import com.florianwoelki.nong.neuralnetwork.neuron.Connection;
 import com.florianwoelki.nong.neuralnetwork.neuron.InputNeuron;
-import com.florianwoelki.nong.neuralnetwork.neuron.Neuron;
 import com.florianwoelki.nong.neuralnetwork.neuron.WorkingNeuron;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Florian Woelki on 15.12.16.
+ * <p>
+ * <summary>
+ * This class represents a neural network.
+ * It contains all the input, hidden and output neurons.
+ * </summary>
  */
 public class NeuralNetwork {
 
@@ -25,24 +28,47 @@ public class NeuralNetwork {
     private List<WorkingNeuron> hiddenNeurons = new ArrayList<>();
     private List<WorkingNeuron> outputNeurons = new ArrayList<>();
 
+    /**
+     * Add a input neuron.
+     *
+     * @param inputNeuron Given input neuron
+     */
     public void addInputNeuron( InputNeuron inputNeuron ) {
         this.inputNeurons.add( inputNeuron );
     }
 
+    /**
+     * Add a hidden neuron.
+     *
+     * @param workingNeuron Given hidden neuron
+     */
     public void addHiddenNeuron( WorkingNeuron workingNeuron ) {
         this.hiddenNeurons.add( workingNeuron );
     }
 
+    /**
+     * Add a output neuron.
+     *
+     * @param workingNeuron Given output neuron
+     */
     public void addOutputNeuron( WorkingNeuron workingNeuron ) {
         this.outputNeurons.add( workingNeuron );
     }
 
+    /**
+     * Generate hidden neurons.
+     *
+     * @param amount Amount of hidden neurons
+     */
     public void generateHiddenNeurons( int amount ) {
         for ( int i = 0; i < amount; i++ ) {
             this.hiddenNeurons.add( new WorkingNeuron() );
         }
     }
 
+    /**
+     * Randomize all the weights between the neurons.
+     */
     public void randomizeAllWeights() {
         for ( WorkingNeuron hiddenNeuron : this.hiddenNeurons ) {
             hiddenNeuron.randomizeWeights();
@@ -53,6 +79,10 @@ public class NeuralNetwork {
         }
     }
 
+    /**
+     * Generate a full mesh of the neural network.
+     * Connect all the neurons.
+     */
     public void generateFullMesh() {
         this.isFullyMeshedGenerated = true;
 
@@ -69,6 +99,11 @@ public class NeuralNetwork {
         }
     }
 
+    /**
+     * Gives a random mutation to a random hidden neuron or output neuron.
+     *
+     * @param mutationRate The mutation rate
+     */
     public void randomMutation( float mutationRate ) {
         int index = MathUtil.random.nextInt( this.hiddenNeurons.size() + this.outputNeurons.size() );
         if ( index < this.hiddenNeurons.size() ) {
@@ -78,10 +113,12 @@ public class NeuralNetwork {
         }
     }
 
-    public InputNeuron getInputNeuronFromIndex( int index ) {
-        return this.inputNeurons.get( index );
-    }
-
+    /**
+     * Get a input neuron from a specific name.
+     *
+     * @param name Name of the input neuron
+     * @return Returned input neuron of the name
+     */
     public InputNeuron getInputNeuronFromName( String name ) {
         for ( InputNeuron neuron : this.inputNeurons ) {
             if ( name.equals( neuron.getName() ) ) {
@@ -91,10 +128,22 @@ public class NeuralNetwork {
         return null;
     }
 
+    /**
+     * Get a input neuron from a specific index.
+     *
+     * @param index Index of the input neuron
+     * @return Returned input neuron of the index
+     */
     public WorkingNeuron getOutputNeuronFromIndex( int index ) {
         return this.outputNeurons.get( index );
     }
 
+    /**
+     * Get a output neuron from a specific name.
+     *
+     * @param name Name of the input neuron
+     * @return Returned output neuron of the name
+     */
     public WorkingNeuron getOutputNeuronFromName( String name ) {
         for ( WorkingNeuron neuron : this.outputNeurons ) {
             if ( name.equals( neuron.getName() ) ) {
@@ -104,6 +153,13 @@ public class NeuralNetwork {
         return null;
     }
 
+    /**
+     * Clone a complete neural network with all input, hidden, output neurons.
+     *
+     * @return The cloned neural network
+     * @throws NNNotFullyMeshedException
+     * @throws NotSameAmountOfNeuronsException
+     */
     public NeuralNetwork cloneFullMesh() throws NNNotFullyMeshedException, NotSameAmountOfNeuronsException {
         if ( !this.isFullyMeshedGenerated ) {
             throw new NNNotFullyMeshedException( "The Neural Network is not fully meshed generated." );
@@ -152,7 +208,7 @@ public class NeuralNetwork {
         return copy;
     }
 
-    public void render( Graphics g, Rectangle rect ) {
+    /*public void render( Graphics g, Rectangle rect ) {
         this.calculateNeuronsRenderPosition( rect );
         float strongestConnection = this.getStrongestConnection();
         renderLayer( g, this.outputNeurons, strongestConnection, 10, 10 );
@@ -274,6 +330,6 @@ public class NeuralNetwork {
             }
         }
         return strongestConnection;
-    }
+    }*/
 
 }

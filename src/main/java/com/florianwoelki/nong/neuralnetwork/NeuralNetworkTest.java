@@ -5,6 +5,10 @@ import com.florianwoelki.nong.neuralnetwork.neuron.WorkingNeuron;
 
 /**
  * Created by Florian Woelki on 15.12.16.
+ * <p>
+ * <summary>
+ * This class is a basic neural network test, check if everything is correct.
+ * </summary>
  */
 public class NeuralNetworkTest {
 
