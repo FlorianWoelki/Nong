@@ -106,7 +106,7 @@ public class Player extends Entity {
 
     private void setInputValues() {
         this.inBias.setValue( 1f );
-        this.inBallX.setValue( this.game.ball.x );
+        this.inBallX.setValue( this.game.getBall().x );
         this.inPaddleX.setValue( Math.abs( this.x ) );
 
         // Debug Information

@@ -43,16 +43,6 @@ public class NeuralNetwork {
         }
     }
 
-    public void invalidate() {
-        for ( WorkingNeuron wn : this.hiddenNeurons ) {
-            wn.invalidate();
-        }
-
-        for ( WorkingNeuron wn : this.outputNeurons ) {
-            wn.invalidate();
-        }
-    }
-
     public void randomizeAllWeights() {
         for ( WorkingNeuron hiddenNeuron : this.hiddenNeurons ) {
             hiddenNeuron.randomizeWeights();
@@ -94,19 +84,6 @@ public class NeuralNetwork {
 
     public InputNeuron getInputNeuronFromName( String name ) {
         for ( InputNeuron neuron : this.inputNeurons ) {
-            if ( name.equals( neuron.getName() ) ) {
-                return neuron;
-            }
-        }
-        return null;
-    }
-
-    public WorkingNeuron getHiddenNeuronFromIndex( int index ) {
-        return this.hiddenNeurons.get( index );
-    }
-
-    public WorkingNeuron getHiddenNeuronFromName( String name ) {
-        for ( WorkingNeuron neuron : this.hiddenNeurons ) {
             if ( name.equals( neuron.getName() ) ) {
                 return neuron;
             }

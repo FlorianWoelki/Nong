@@ -3,6 +3,8 @@ package com.florianwoelki.nong;
 import com.florianwoelki.nong.entity.Ball;
 import com.florianwoelki.nong.entity.Player;
 import com.florianwoelki.nong.input.Keyboard;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -13,15 +15,19 @@ import java.awt.image.BufferStrategy;
 public class Game extends Canvas implements Runnable {
 
     private Window window;
+    @Getter
     private Keyboard keyboard;
 
     private Thread thread;
     private boolean running;
 
-    public Player player;
-    public Ball ball;
+    private Player player;
+    @Getter
+    private Ball ball;
 
-    public int score;
+    @Setter
+    @Getter
+    private int score;
 
     public Game() {
         this.keyboard = new Keyboard();
@@ -126,10 +132,6 @@ public class Game extends Canvas implements Runnable {
         //this.player.brain.render( g, new Rectangle( 150, 0, 200, 250 ) );
         g.dispose();
         bs.show();
-    }
-
-    public Keyboard getKeyboard() {
-        return this.keyboard;
     }
 
 }

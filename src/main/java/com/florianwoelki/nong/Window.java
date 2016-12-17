@@ -8,9 +8,9 @@ import java.awt.*;
  */
 public class Window extends JFrame {
 
-    public static final int WIDTH = 480;
-    public static final int HEIGHT = 640;
-    public static final String TITLE = "Nong";
+    private static final int WIDTH = 480;
+    private static final int HEIGHT = 640;
+    private static final String TITLE = "Nong";
 
     public Window( Game game ) {
         super( Window.TITLE );

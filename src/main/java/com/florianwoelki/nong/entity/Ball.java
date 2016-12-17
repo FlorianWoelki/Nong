@@ -73,11 +73,11 @@ public class Ball extends Entity {
             }
 
             this.invertYSpeed();
-            this.game.score++;
+            this.game.setScore( this.game.getScore() + 1 );
         }
 
         if ( this.y > this.game.getHeight() - this.height ) {
-            this.game.score = 0;
+            this.game.setScore( 0 );
             this.reset();
             e.reset();
         }
