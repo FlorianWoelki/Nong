@@ -6,6 +6,8 @@ import com.florianwoelki.nong.neuralnetwork.exception.NNNotFullyMeshedException;
 import com.florianwoelki.nong.neuralnetwork.exception.NotSameAmountOfNeuronsException;
 import com.florianwoelki.nong.neuralnetwork.neuron.InputNeuron;
 import com.florianwoelki.nong.neuralnetwork.neuron.WorkingNeuron;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.awt.*;
 
@@ -34,6 +36,8 @@ public class Player extends Entity {
 
     private WorkingNeuron outMoveDirection = new WorkingNeuron();
 
+    @Setter
+    @Getter
     private NeuralNetwork brain;
 
     /**
@@ -159,14 +163,6 @@ public class Player extends Entity {
         for ( int i = 0; i < 3; i++ ) {
             this.brain.randomMutation( 0.5f );
         }
-    }
-
-    public void setBrain(NeuralNetwork brain) {
-        this.brain = brain;
-    }
-
-    public NeuralNetwork getBrain() {
-        return brain;
     }
 
 }

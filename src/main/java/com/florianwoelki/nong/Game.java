@@ -43,22 +43,22 @@ public class Game extends Canvas implements Runnable {
         this.keyboard = new Keyboard();
 
         this.requestFocus();
-        this.setFocusable( true );
-        this.addKeyListener( this.keyboard );
+        this.setFocusable(true);
+        this.addKeyListener(keyboard);
 
-        this.window = new Window( this );
-        this.window.setVisible( true );
+        this.window = new Window(this);
+        this.window.setVisible(true);
 
-        this.player = new Player( this );
-        this.ball = new Ball( this, this.getWidth() / 2, this.getHeight() / 2 );
-        this.ball.setSpeed( (float) Math.toRadians( -45 ) );
+        this.player = new Player(this);
+        this.ball = new Ball(this, getWidth() / 2, getHeight() / 2);
+        this.ball.setSpeed((float) Math.toRadians(-45));
     }
 
     /**
      * Start the game thread.
      */
     public synchronized void start() {
-        if ( this.running ) {
+        if(running) {
             return;
         }
 
@@ -67,23 +67,23 @@ public class Game extends Canvas implements Runnable {
             player.setBrain(neuralNetwork);
         }
 
-        this.running = true;
-        this.thread = new Thread( this, "Game Window" );
-        this.thread.start();
+        running = true;
+        thread = new Thread(this, "Game Window");
+        thread.start();
     }
 
     /**
      * Stop the game thread.
      */
     public synchronized void stop() {
-        if ( !this.running ) {
+        if(!running) {
             return;
         }
 
-        this.running = false;
+        running = false;
         try {
-            this.thread.join();
-        } catch ( InterruptedException e ) {
+            thread.join();
+        } catch(InterruptedException e) {
             e.printStackTrace();
         }
     }
@@ -101,48 +101,48 @@ public class Game extends Canvas implements Runnable {
         int fps = 0, ups = 0;
 
         // Game Loop
-        while ( this.running ) {
+        while(running) {
             boolean shouldRender = false;
             long now = System.nanoTime();
-            delta += ( now - lastTime ) / ns;
+            delta += (now - lastTime) / ns;
             lastTime = now;
-            while ( delta >= 1 ) {
+            while(delta >= 1) {
                 delta--;
-                this.update();
+                update();
                 ups++;
                 shouldRender = true;
             }
 
             try {
-                Thread.sleep( 3 );
-            } catch ( InterruptedException e ) {
+                Thread.sleep(3);
+            } catch(InterruptedException e) {
                 e.printStackTrace();
             }
 
-            if ( shouldRender ) {
-                this.render();
+            if(shouldRender) {
+                render();
                 fps++;
             }
 
-            if ( System.currentTimeMillis() - lastTimer > 1000 ) {
+            if(System.currentTimeMillis() - lastTimer > 1000) {
                 lastTimer += 1000;
-                System.out.println( "FPS: " + fps + ", UPS: " + ups );
+                System.out.println("FPS: " + fps + ", UPS: " + ups);
                 ups = fps = 0;
                 FileManager.save(player.getBrain(), "brain"); // performance...
             }
         }
 
-        this.stop();
+        stop();
     }
 
     /**
      * This method updates the game with all components.
      */
     private void update() {
-        this.keyboard.update();
-        this.player.update();
-        this.ball.update();
-        this.ball.checkCollision( this.player );
+        keyboard.update();
+        player.update();
+        ball.update();
+        ball.checkCollision(player);
     }
 
     /**
@@ -150,18 +150,18 @@ public class Game extends Canvas implements Runnable {
      */
     private void render() {
         BufferStrategy bs = getBufferStrategy();
-        if ( bs == null ) {
-            this.createBufferStrategy( 3 );
+        if(bs == null) {
+            createBufferStrategy(3);
             return;
         }
 
         Graphics g = bs.getDrawGraphics();
-        g.setColor( Color.BLACK );
-        g.fillRect( 0, 0, this.getWidth(), this.getHeight() );
-        this.player.render( g );
-        this.ball.render( g );
-        g.drawString( "" + this.score, this.getWidth() / 2, 80 );
-        this.player.getBrain().render( g, new Rectangle( 150, 0, 200, 250 ) );
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, getWidth(), getHeight());
+        player.render(g);
+        ball.render(g);
+        g.drawString("" + score, getWidth() / 2, 80);
+        player.getBrain().render(g, new Rectangle(150, 0, 200, 250));
         g.dispose();
         bs.show();
     }
