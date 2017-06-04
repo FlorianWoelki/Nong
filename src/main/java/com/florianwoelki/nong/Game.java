@@ -3,6 +3,8 @@ package com.florianwoelki.nong;
 import com.florianwoelki.nong.entity.Ball;
 import com.florianwoelki.nong.entity.Player;
 import com.florianwoelki.nong.input.Keyboard;
+import com.florianwoelki.nong.neuralnetwork.NeuralNetwork;
+import com.florianwoelki.nong.util.FileManager;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -58,6 +60,11 @@ public class Game extends Canvas implements Runnable {
     public synchronized void start() {
         if ( this.running ) {
             return;
+        }
+
+        if(FileManager.exist("brain")) {
+            NeuralNetwork neuralNetwork = FileManager.load("brain");
+            player.setBrain(neuralNetwork);
         }
 
         this.running = true;
@@ -121,6 +128,7 @@ public class Game extends Canvas implements Runnable {
                 lastTimer += 1000;
                 System.out.println( "FPS: " + fps + ", UPS: " + ups );
                 ups = fps = 0;
+                FileManager.save(player.getBrain(), "brain"); // performance...
             }
         }
 

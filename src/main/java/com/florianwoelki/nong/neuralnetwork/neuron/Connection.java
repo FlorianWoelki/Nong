@@ -2,6 +2,8 @@ package com.florianwoelki.nong.neuralnetwork.neuron;
 
 import lombok.AllArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * Created by Florian Woelki on 15.12.16.
  * <p>
@@ -10,7 +12,7 @@ import lombok.AllArgsConstructor;
  * </summary>
  */
 @AllArgsConstructor
-public class Connection {
+public class Connection implements Serializable {
 
     public Neuron entryNeuron;
     public float weight = 1;

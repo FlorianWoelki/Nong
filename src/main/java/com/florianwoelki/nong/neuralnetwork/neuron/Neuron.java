@@ -3,6 +3,8 @@ package com.florianwoelki.nong.neuralnetwork.neuron;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * Created by Florian Woelki on 15.12.16.
  * <p>
@@ -10,7 +12,7 @@ import lombok.Setter;
  * This class represents a basic neuron of the neural network.
  * </summary>
  */
-public abstract class Neuron {
+public abstract class Neuron implements Serializable {
 
     @Setter
     @Getter

@@ -133,9 +133,9 @@ public class Player extends Entity {
         this.inPaddleX.setValue( Math.abs( this.x ) );
 
         // Debug Information
-        System.out.println( this.inBias.getValue() + "\t\t\t" + this.inBallX.getValue() + "\t\t\t" + this.inPaddleX.getValue() );
+        System.out.println( this.inBias.getValue() + "\t\t\tBX: " + this.inBallX.getValue() + "\t\t\tPX: " + this.inPaddleX.getValue() );
         System.out.println( this.outMoveDirection.getValue() );
-        System.out.println( "------" );
+        System.out.println( "----------" );
     }
 
     /**
@@ -159,6 +159,10 @@ public class Player extends Entity {
         for ( int i = 0; i < 3; i++ ) {
             this.brain.randomMutation( 0.5f );
         }
+    }
+
+    public void setBrain(NeuralNetwork brain) {
+        this.brain = brain;
     }
 
     public NeuralNetwork getBrain() {

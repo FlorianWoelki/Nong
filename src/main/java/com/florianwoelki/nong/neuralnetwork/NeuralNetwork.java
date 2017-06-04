@@ -9,6 +9,7 @@ import com.florianwoelki.nong.neuralnetwork.neuron.Neuron;
 import com.florianwoelki.nong.neuralnetwork.neuron.WorkingNeuron;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ import java.util.List;
  * It contains all the input, hidden and output neurons.
  * </summary>
  */
-public class NeuralNetwork {
+public class NeuralNetwork implements Serializable {
 
     private final float NEURON_SIZE = 15;
 
