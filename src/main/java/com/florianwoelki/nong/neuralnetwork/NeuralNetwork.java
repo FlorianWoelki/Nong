@@ -5,8 +5,10 @@ import com.florianwoelki.nong.neuralnetwork.exception.NNNotFullyMeshedException;
 import com.florianwoelki.nong.neuralnetwork.exception.NotSameAmountOfNeuronsException;
 import com.florianwoelki.nong.neuralnetwork.neuron.Connection;
 import com.florianwoelki.nong.neuralnetwork.neuron.InputNeuron;
+import com.florianwoelki.nong.neuralnetwork.neuron.Neuron;
 import com.florianwoelki.nong.neuralnetwork.neuron.WorkingNeuron;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -208,7 +210,7 @@ public class NeuralNetwork {
         return copy;
     }
 
-    /*public void render( Graphics g, Rectangle rect ) {
+    public void render( Graphics g, Rectangle rect ) {
         this.calculateNeuronsRenderPosition( rect );
         float strongestConnection = this.getStrongestConnection();
         renderLayer( g, this.outputNeurons, strongestConnection, 10, 10 );
@@ -330,6 +332,6 @@ public class NeuralNetwork {
             }
         }
         return strongestConnection;
-    }*/
+    }
 
 }

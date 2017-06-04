@@ -153,7 +153,7 @@ public class Game extends Canvas implements Runnable {
         this.player.render( g );
         this.ball.render( g );
         g.drawString( "" + this.score, this.getWidth() / 2, 80 );
-        // this.player.brain.render( g, new Rectangle( 150, 0, 200, 250 ) );
+        this.player.getBrain().render( g, new Rectangle( 150, 0, 200, 250 ) );
         g.dispose();
         bs.show();
     }

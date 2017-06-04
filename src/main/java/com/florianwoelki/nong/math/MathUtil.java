@@ -19,8 +19,8 @@ public final class MathUtil {
      * @param value Given value which will be absolute
      * @return Absolute value of the given value
      */
-    public static float abs( float value ) {
-        return Math.abs( value );
+    public static float abs(float value) {
+        return Math.abs(value);
     }
 
     /**
@@ -29,8 +29,8 @@ public final class MathUtil {
      * @param x Given value for the sigmoid function
      * @return Result of the calculation of the sigmoid function
      */
-    public static float sigmoid( float x ) {
-        return (float) ( 1 / ( 1 + Math.exp( -x ) ) );
+    public static float sigmoid(float x) {
+        return (float) (1f / (1f + Math.pow(Math.E, -x)));
     }
 
     /**
@@ -40,7 +40,7 @@ public final class MathUtil {
      * @param b Number two
      * @return The max value
      */
-    public static float max( float a, float b ) {
+    public static float max(float a, float b) {
         return a > b ? a : b;
     }
 

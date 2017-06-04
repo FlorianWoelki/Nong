@@ -161,4 +161,8 @@ public class Player extends Entity {
         }
     }
 
+    public NeuralNetwork getBrain() {
+        return brain;
+    }
+
 }
