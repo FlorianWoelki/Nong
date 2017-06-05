@@ -22,8 +22,8 @@ public class Ball extends Entity {
      * @param x    X coordinate of the ball, where it will spawn
      * @param y    Y coordinate of the ball, where it will spawn
      */
-    public Ball( Game game, float x, float y ) {
-        super( game, x, y );
+    public Ball(Game game, float x, float y) {
+        super(game, x, y);
 
         this.width = 20;
         this.height = 20;
@@ -35,9 +35,9 @@ public class Ball extends Entity {
      * @param g Graphics for rendering
      */
     @Override
-    public void render( Graphics g ) {
-        g.setColor( Color.WHITE );
-        g.fillRect( (int) this.x, (int) this.y, this.width, this.height );
+    public void render(Graphics g) {
+        g.setColor(Color.WHITE);
+        g.fillRect((int) this.x, (int) this.y, this.width, this.height);
     }
 
     /**
@@ -53,14 +53,14 @@ public class Ball extends Entity {
         this.y += this.dy;
 
         // Handle collision with game window
-        if ( this.y < 0 ) {
+        if(this.y < 0) {
             this.y = 0;
             this.invertYSpeed();
         }
-        if ( this.x < 0 ) {
+        if(this.x < 0) {
             this.x = 0;
             this.invertXSpeed();
-        } else if ( this.x > this.game.getWidth() - this.width ) {
+        } else if(this.x > this.game.getWidth() - this.width) {
             this.x = this.game.getWidth() - this.width;
             this.invertXSpeed();
         }
@@ -72,9 +72,9 @@ public class Ball extends Entity {
      *
      * @param rotation Rotation in radians of speed
      */
-    public void setSpeed( float rotation ) {
-        this.dx = (float) ( Math.cos( rotation ) * this.SPEED );
-        this.dy = (float) ( Math.sin( rotation ) * this.SPEED );
+    public void setSpeed(float rotation) {
+        this.dx = (float) (Math.cos(rotation) * this.SPEED);
+        this.dy = (float) (Math.sin(rotation) * this.SPEED);
     }
 
     /**
@@ -82,22 +82,22 @@ public class Ball extends Entity {
      *
      * @param player The player who is interacting with the ball
      */
-    public void checkCollision( Player player ) {
+    public void checkCollision(Player player) {
         // Checks if ball interacts with player
-        if ( this.x <= player.x + player.width && this.x + this.width >= player.x &&
-                this.y <= player.y + player.height && this.y + this.height >= player.y ) {
-            if ( this.oldX <= player.x + player.width && this.oldX + this.width >= player.x &&
-                    this.y <= player.y + player.height && this.y + this.height >= player.y ) {
-                if ( this.oldY >= player.y + player.height / 2f ) {
+        if(this.x <= player.x + player.width && this.x + this.width >= player.x &&
+                this.y <= player.y + player.height && this.y + this.height >= player.y) {
+            if(this.oldX <= player.x + player.width && this.oldX + this.width >= player.x &&
+                    this.y <= player.y + player.height && this.y + this.height >= player.y) {
+                if(this.oldY >= player.y + player.height / 2f) {
                     this.y = player.y + player.height + 0.001f;
                 } else {
                     this.y = player.y - this.height - 0.001f;
                 }
             }
 
-            if ( this.x <= player.x + player.width && this.x + this.width >= player.x &&
-                    this.oldY <= player.y + player.height && this.oldY + this.height >= player.y ) {
-                if ( this.oldX >= player.x + player.width / 2f ) {
+            if(this.x <= player.x + player.width && this.x + this.width >= player.x &&
+                    this.oldY <= player.y + player.height && this.oldY + this.height >= player.y) {
+                if(this.oldX >= player.x + player.width / 2f) {
                     this.x = player.x + player.width + 0.001f;
                 } else {
                     this.x = player.x - this.width - 0.001f;
@@ -105,12 +105,12 @@ public class Ball extends Entity {
             }
 
             this.invertYSpeed();
-            this.game.setScore( this.game.getScore() + 1 );
+            this.game.setScore(this.game.getScore() + 1);
         }
 
         // Check if resetting is needed
-        if ( this.y > this.game.getHeight() - this.height ) {
-            this.game.setScore( 0 );
+        if(this.y > this.game.getHeight() - this.height) {
+            this.game.setScore(0);
             this.reset();
             player.reset();
         }
@@ -122,7 +122,7 @@ public class Ball extends Entity {
     public void reset() {
         this.x = this.game.getWidth() / 2;
         this.y = this.game.getHeight() / 2;
-        this.setSpeed( (float) Math.toRadians( -45 ) );
+        this.setSpeed((float) Math.toRadians(-45));
     }
 
     /**

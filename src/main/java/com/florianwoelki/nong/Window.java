@@ -22,19 +22,19 @@ public class Window extends JFrame {
      *
      * @param game Main Game class
      */
-    public Window( Game game ) {
-        super( Window.TITLE );
+    public Window(Game game) {
+        super(Window.TITLE);
 
-        Dimension size = new Dimension( Window.WIDTH, Window.HEIGHT );
-        game.setPreferredSize( size );
-        game.setMaximumSize( size );
-        game.setMinimumSize( size );
+        Dimension size = new Dimension(Window.WIDTH, Window.HEIGHT);
+        game.setPreferredSize(size);
+        game.setMaximumSize(size);
+        game.setMinimumSize(size);
 
-        this.add( game );
+        this.add(game);
         this.pack();
-        this.setResizable( false );
-        this.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
-        this.setLocationRelativeTo( null );
+        this.setResizable(false);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
     }
 
 }

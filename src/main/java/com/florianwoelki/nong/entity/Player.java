@@ -46,28 +46,28 @@ public class Player extends Entity {
      *
      * @param game Main Game class
      */
-    public Player( Game game ) {
-        super( game, game.getWidth() / 2 - Player.PLAYER_WIDTH / 2, game.getHeight() - 20 );
+    public Player(Game game) {
+        super(game, game.getWidth() / 2 - Player.PLAYER_WIDTH / 2, game.getHeight() - 20);
 
         this.width = Player.PLAYER_WIDTH;
         this.height = Player.PLAYER_HEIGHT;
 
-        this.inBias.setName( this.NAME_IN_BIAS );
-        this.inBallX.setName( this.NAME_IN_BALL_X );
-        this.inPaddleX.setName( this.NAME_IN_PADDLE_X );
+        this.inBias.setName(this.NAME_IN_BIAS);
+        this.inBallX.setName(this.NAME_IN_BALL_X);
+        this.inPaddleX.setName(this.NAME_IN_PADDLE_X);
 
-        this.outMoveDirection.setName( this.NAME_OUT_MOVE_DIRECTION );
+        this.outMoveDirection.setName(this.NAME_OUT_MOVE_DIRECTION);
 
         // Creating brain/Neural Network
         this.brain = new NeuralNetwork();
 
-        this.brain.addInputNeuron( this.inBias );
-        this.brain.addInputNeuron( this.inBallX );
-        this.brain.addInputNeuron( this.inPaddleX );
+        this.brain.addInputNeuron(this.inBias);
+        this.brain.addInputNeuron(this.inBallX);
+        this.brain.addInputNeuron(this.inPaddleX);
 
-        this.brain.generateHiddenNeurons( 3 );
+        this.brain.generateHiddenNeurons(3);
 
-        this.brain.addOutputNeuron( this.outMoveDirection );
+        this.brain.addOutputNeuron(this.outMoveDirection);
 
         this.brain.generateFullMesh();
 
@@ -80,9 +80,9 @@ public class Player extends Entity {
      * @param g Graphics for rendering
      */
     @Override
-    public void render( Graphics g ) {
-        g.setColor( Color.WHITE );
-        g.fillRect( (int) this.x, (int) this.y, this.width, this.height );
+    public void render(Graphics g) {
+        g.setColor(Color.WHITE);
+        g.fillRect((int) this.x, (int) this.y, this.width, this.height);
     }
 
     /**
@@ -95,10 +95,10 @@ public class Player extends Entity {
         this.y += this.dy;
 
         // Handle input
-        if ( this.game.getKeyboard().isSpaceActivated ) {
-            if ( this.game.getKeyboard().left ) {
+        if(this.game.getKeyboard().isSpaceActivated) {
+            if(this.game.getKeyboard().left) {
                 this.dx = -Player.MOVE_SPEED;
-            } else if ( this.game.getKeyboard().right ) {
+            } else if(this.game.getKeyboard().right) {
                 this.dx = Player.MOVE_SPEED;
             } else {
                 this.dx = this.dy = 0;
@@ -109,21 +109,21 @@ public class Player extends Entity {
 
             try {
                 this.brain = this.brain.cloneFullMesh();
-            } catch ( NNNotFullyMeshedException | NotSameAmountOfNeuronsException e ) {
+            } catch(NNNotFullyMeshedException | NotSameAmountOfNeuronsException e) {
                 e.printStackTrace();
             }
 
-            this.inBias = this.brain.getInputNeuronFromName( this.NAME_IN_BIAS );
-            this.inBallX = this.brain.getInputNeuronFromName( this.NAME_IN_BALL_X );
-            this.inPaddleX = this.brain.getInputNeuronFromName( this.NAME_IN_PADDLE_X );
+            this.inBias = this.brain.getInputNeuronFromName(this.NAME_IN_BIAS);
+            this.inBallX = this.brain.getInputNeuronFromName(this.NAME_IN_BALL_X);
+            this.inPaddleX = this.brain.getInputNeuronFromName(this.NAME_IN_PADDLE_X);
 
-            this.outMoveDirection = this.brain.getOutputNeuronFromName( this.NAME_OUT_MOVE_DIRECTION );
+            this.outMoveDirection = this.brain.getOutputNeuronFromName(this.NAME_OUT_MOVE_DIRECTION);
         }
 
         // Handle collision with game window
-        if ( this.x <= 0 ) {
+        if(this.x <= 0) {
             this.x = 0;
-        } else if ( this.x >= this.game.getWidth() - this.width ) {
+        } else if(this.x >= this.game.getWidth() - this.width) {
             this.x = this.game.getWidth() - this.width;
         }
     }
@@ -132,21 +132,21 @@ public class Player extends Entity {
      * Set all values of the neural network.
      */
     private void setInputValues() {
-        this.inBias.setValue( 1f );
-        this.inBallX.setValue( this.game.getBall().x );
-        this.inPaddleX.setValue( Math.abs( this.x ) );
+        this.inBias.setValue(1f);
+        this.inBallX.setValue(this.game.getBall().x);
+        this.inPaddleX.setValue(Math.abs(this.x));
 
         // Debug Information
-        System.out.println( this.inBias.getValue() + "\t\t\tBX: " + this.inBallX.getValue() + "\t\t\tPX: " + this.inPaddleX.getValue() );
-        System.out.println( this.outMoveDirection.getValue() );
-        System.out.println( "----------" );
+        System.out.println(this.inBias.getValue() + "\t\t\tBX: " + this.inBallX.getValue() + "\t\t\tPX: " + this.inPaddleX.getValue());
+        System.out.println(this.outMoveDirection.getValue());
+        System.out.println("----------");
     }
 
     /**
      * With this method the player will act caused by the Neural Network.
      */
     private void act() {
-        if ( this.outMoveDirection.getValue() <= 0.5f ) {
+        if(this.outMoveDirection.getValue() <= 0.5f) {
             this.dx = -Player.MOVE_SPEED;
         } else {
             this.dx = Player.MOVE_SPEED;
@@ -160,8 +160,8 @@ public class Player extends Entity {
         this.x = game.getWidth() / 2 - Player.PLAYER_WIDTH / 2;
         this.y = game.getHeight() - 20;
 
-        for ( int i = 0; i < 3; i++ ) {
-            this.brain.randomMutation( 0.5f );
+        for(int i = 0; i < 3; i++) {
+            this.brain.randomMutation(0.5f);
         }
     }
 

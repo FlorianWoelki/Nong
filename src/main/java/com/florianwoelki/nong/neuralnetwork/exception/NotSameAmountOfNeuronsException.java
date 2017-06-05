@@ -14,8 +14,8 @@ public class NotSameAmountOfNeuronsException extends Exception {
      *
      * @param message Which will be printed if the error occurs.
      */
-    public NotSameAmountOfNeuronsException( String message ) {
-        super( message );
+    public NotSameAmountOfNeuronsException(String message) {
+        super(message);
     }
 
 }

@@ -34,7 +34,7 @@ public abstract class Entity {
      * @param x    X coordinate of the entity, where it will spawn
      * @param y    Y coordinate of the entity, where it will spawn
      */
-    public Entity( Game game, float x, float y ) {
+    public Entity(Game game, float x, float y) {
         this.game = game;
         this.x = x;
         this.y = y;
@@ -45,7 +45,7 @@ public abstract class Entity {
      *
      * @param g Graphics for rendering
      */
-    public abstract void render( Graphics g );
+    public abstract void render(Graphics g);
 
     /**
      * With this method you can update the entity.

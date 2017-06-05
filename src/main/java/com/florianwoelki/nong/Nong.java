@@ -9,7 +9,7 @@ package com.florianwoelki.nong;
  */
 public class Nong {
 
-    public static void main( String[] args ) {
+    public static void main(String[] args) {
         Game game = new Game();
         game.start();
     }

@@ -14,8 +14,8 @@ public class NNNotFullyMeshedException extends Exception {
      *
      * @param message Which will be printed if the error occurs.
      */
-    public NNNotFullyMeshedException( String message ) {
-        super( message );
+    public NNNotFullyMeshedException(String message) {
+        super(message);
     }
 
 }

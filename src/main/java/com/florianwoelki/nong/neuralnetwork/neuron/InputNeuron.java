@@ -21,7 +21,7 @@ public class InputNeuron extends Neuron {
      */
     @Override
     public float getValue() {
-        if ( this.value == null ) {
+        if(this.value == null) {
             return 0f;
         }
 
@@ -36,7 +36,7 @@ public class InputNeuron extends Neuron {
     @Override
     public Neuron nameCopy() {
         InputNeuron clone = new InputNeuron();
-        clone.setName( this.getName() );
+        clone.setName(this.getName());
         return clone;
     }
 

@@ -24,8 +24,8 @@ public class WorkingNeuron extends Neuron {
      *
      * @param mutationRate The mutation rate
      */
-    public void randomMutation( float mutationRate ) {
-        Connection connection = this.connections.get( MathUtil.random.nextInt( this.connections.size() ) );
+    public void randomMutation(float mutationRate) {
+        Connection connection = this.connections.get(MathUtil.random.nextInt(this.connections.size()));
         connection.weight += (float) MathUtil.random.nextDouble() * 2 * mutationRate - mutationRate;
     }
 
@@ -35,8 +35,8 @@ public class WorkingNeuron extends Neuron {
      * @param neuron Previous neuron
      * @param weight Given weight between both neurons
      */
-    public void addNeuronConnection( Neuron neuron, float weight ) {
-        this.addNeuronConnection( new Connection( neuron, weight ) );
+    public void addNeuronConnection(Neuron neuron, float weight) {
+        this.addNeuronConnection(new Connection(neuron, weight));
     }
 
     /**
@@ -44,16 +44,16 @@ public class WorkingNeuron extends Neuron {
      *
      * @param connection Connection between neurons
      */
-    public void addNeuronConnection( Connection connection ) {
-        this.connections.add( connection );
+    public void addNeuronConnection(Connection connection) {
+        this.connections.add(connection);
     }
 
     /**
      * This method randomize all the weights between the neurons.
      */
     public void randomizeWeights() {
-        for ( Connection connection : this.connections ) {
-            connection.weight = (float) ( MathUtil.random.nextDouble() * 2 - 1 );
+        for(Connection connection : this.connections) {
+            connection.weight = (float) (MathUtil.random.nextDouble() * 2 - 1);
         }
     }
 
@@ -62,11 +62,11 @@ public class WorkingNeuron extends Neuron {
      */
     private void calculate() {
         float value = 0;
-        for ( Connection connection : this.connections ) {
+        for(Connection connection : this.connections) {
             value += connection.getValue();
         }
 
-        value = MathUtil.sigmoid( value );
+        value = MathUtil.sigmoid(value);
         this.value = value;
     }
 
@@ -77,7 +77,7 @@ public class WorkingNeuron extends Neuron {
      */
     @Override
     public float getValue() {
-        if ( this.value == 0.0f ) {
+        if(this.value == 0.0f) {
             calculate();
         }
         return this.value;
@@ -91,7 +91,7 @@ public class WorkingNeuron extends Neuron {
     @Override
     public Neuron nameCopy() {
         WorkingNeuron clone = new WorkingNeuron();
-        clone.setName( getName() );
+        clone.setName(getName());
         return clone;
     }
 
@@ -102,9 +102,9 @@ public class WorkingNeuron extends Neuron {
      */
     public float getStrongestConnection() {
         float strongest = 0;
-        for ( Connection connection : this.connections ) {
-            float val = MathUtil.abs( connection.weight );
-            if ( val > strongest ) {
+        for(Connection connection : this.connections) {
+            float val = MathUtil.abs(connection.weight);
+            if(val > strongest) {
                 strongest = val;
             }
         }
