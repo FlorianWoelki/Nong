@@ -135,11 +135,6 @@ public class Player extends Entity {
         this.inBias.setValue(1f);
         this.inBallX.setValue(this.game.getBall().x);
         this.inPaddleX.setValue(Math.abs(this.x));
-
-        // Debug Information
-        System.out.println(this.inBias.getValue() + "\t\t\tBX: " + this.inBallX.getValue() + "\t\t\tPX: " + this.inPaddleX.getValue());
-        System.out.println(this.outMoveDirection.getValue());
-        System.out.println("----------");
     }
 
     /**
@@ -157,10 +152,15 @@ public class Player extends Entity {
      * This method resets the coordinates and the speed of the player.
      */
     public void reset() {
+        // Debug Information
+        System.out.println("BX: " + this.inBallX.getValue() + "\t\t\tPX: " + this.inPaddleX.getValue());
+        System.out.println(this.outMoveDirection.getValue());
+        System.out.println("----------");
+
         this.x = game.getWidth() / 2 - Player.PLAYER_WIDTH / 2;
         this.y = game.getHeight() - 20;
 
-        for(int i = 0; i < 3; i++) {
+        for(int i = 0; i < 7; i++) {
             this.brain.randomMutation(0.5f);
         }
     }
